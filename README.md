@@ -20,6 +20,19 @@ screenshot:
 
 you can change the default colors by changing Log4f.colorMap
 
+## Native
+
+Log4f wrap Android logcat and iOS NSLog. Here is what it looks like in Locgcat tool:  
+
+![](imgs/logcat.png)
+
+and what it looks like in xcode log console:  
+
+![](imgs/xcode.png)  
+
+I add a number so that if we can filter wannring and above logs by "[2345]"...  
+It's stupid, but I didn't find the better way...
+
 ## Logan
 
 Log4f use Logan to log to files and server
