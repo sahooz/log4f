@@ -180,7 +180,7 @@ public class RealSendLogRunnable extends SendLogRunnable {
       String data = new String(backData);
       if (!TextUtils.isEmpty(data)) {
         JSONObject jsonObj = new JSONObject(data);
-        if (jsonObj.optBoolean("success", false)) {
+        if (jsonObj.optInt("success", -1) == 200) {
           isSuccess = true;
         }
       }
