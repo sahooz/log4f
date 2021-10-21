@@ -55,57 +55,44 @@ class _LogConsoleState extends State<LogConsole> implements LogListener {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Log Console"),
+        iconTheme: IconThemeData(color: Colors.white),
+        actionsIconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: Colors.blue,
+        title: Text("Log Console", style: TextStyle(color: Colors.white),),
         actions: [
-          MaterialButton(
-            padding: EdgeInsets.all(0),
-            onPressed: () {
-              setState(() {
-                autoScroll = ! autoScroll;
-                if(autoScroll) {
-                  listController.jumpTo(listController.position.maxScrollExtent);
-                }
-              });
-            },
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Checkbox(
-                  value: autoScroll,
-                  onChanged: (checked) { },
-                ),
-                Text("SCROLL", style: TextStyle(color: Colors.white),),
-              ],
-            ),
-          ),
-
-          TextButton(
-            onPressed: () {
-              setState(() {
-                _reverse = !_reverse;
-              });
-            },
-            child: Text("REVERSE", style: TextStyle(color: Colors.white))
-          ),
-          TextButton(
-            onPressed: () {
-              setState(() {
-                copy();
-              });
-            },
-            child: Text("COPY", style: TextStyle(color: Colors.white),)
-          ),
-          TextButton(
-              onPressed: () {
+          PopupMenuButton(
+            icon: Icon(Icons.more_horiz),
+            itemBuilder: (context) => [
+              PopupMenuItem(child: Text("Toggle Auto Scroll"), onTap: () {
+                setState(() {
+                  autoScroll = ! autoScroll;
+                  if(autoScroll) {
+                    listController.jumpTo(listController.position.maxScrollExtent);
+                  }
+                });
+              }),
+              PopupMenuItem(child: Text("Toogle Reverse"), onTap: () {
+                setState(() {
+                  _reverse = !_reverse;
+                });
+              }),
+              PopupMenuItem(child: Text("Copy Logs"), onTap: (){
+                setState(() {
+                  copy();
+                });
+              }),
+              PopupMenuItem(child: Text("Clear Logs"), onTap: () {
                 setState(() {
                   _all.clear();
                   _logs.clear();
                   Log4f.logContainer.clear();
                 });
-              },
-              child: Text("CLEAR", style: TextStyle(color: Colors.white),)
-          ),
+              }),
+            ],
+          )
+
         ],
       ),
       body: Column(
@@ -132,8 +119,8 @@ class _LogConsoleState extends State<LogConsole> implements LogListener {
               reverse: _reverse,
             )
           ),
-          Container(
-            padding: EdgeInsets.only(left: 20, right: 20),
+          Padding(
+            padding: EdgeInsets.all(16),
             child: Row(
               children: [
                 Expanded(
@@ -142,6 +129,7 @@ class _LogConsoleState extends State<LogConsole> implements LogListener {
                     controller: textController,
                     decoration: InputDecoration(
                       hintText: "Filter...",
+                      contentPadding: EdgeInsets.only(left: 12, right: 12),
                       border: OutlineInputBorder()
                     ),
                   )

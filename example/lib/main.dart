@@ -39,9 +39,25 @@ class Home extends StatelessWidget {
             children: [
               OutlinedButton(
                   onPressed: () async {
-                    useLogan = await FlutterLogan.init("aseKey", "aesIv", 1024 * 1024 * 10);
+                    useLogan = await FlutterLogan.init("0123456789012345", "0123456789012345", 1024 * 1024 * 10);
                   },
                   child: Text("Init logan")
+              ),
+              OutlinedButton(
+                  onPressed: () async {
+                    final today = DateTime.now();
+                    final date = "${today.year.toString()}-${today.month.toString().padLeft(2, '0')}-${today.day.toString().padLeft(2, '0')}";
+                    final bool back = await FlutterLogan.upload(
+                        'http://192.168.3.46:8080/logan/logan/upload.json',
+                        date,
+                        'FlutterTestAppId',
+                        'FlutterTestUnionId',
+                        'FlutterTestDeviceId'
+                    );
+
+                    Log4f.i(msg: back? 'Upload to server succeed' : 'Failed upload to server');
+                  },
+                  child: Text("Upload")
               ),
               OutlinedButton(
                   onPressed: () {
