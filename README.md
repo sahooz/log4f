@@ -1,4 +1,4 @@
-# log4f
+# log4f ｜ [中文说明](https://blog.csdn.net/u013028621/article/details/120901532)
 
 Logger for Flutter, inspired by Android logcat
 
