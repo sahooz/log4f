@@ -20,13 +20,13 @@
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
     SEL sel = NSSelectorFromString([call.method stringByAppendingString:@":result:"]);
     if(sel && [self respondsToSelector:sel]){
-        ((void(*)(id,SEL,...))objc_msgSend)(self,sel,call.arguments,result);
+        ((void(*)(id,SEL,NSDictionary *,FlutterResult))objc_msgSend)(self,sel,call.arguments,result);
     }else{
         result(FlutterMethodNotImplemented);
     }
 }
 
-- (void)doLog:(NSDictionary *)args result:(FlutterResult)result {
+- (void)doLog: (NSDictionary *)args result: (FlutterResult)result {
     NSString *level = args[@"level"];
     NSString *tag = args[@"tag"];
     NSString *msg = args[@"msg"];
