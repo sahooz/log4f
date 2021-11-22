@@ -29,8 +29,8 @@ class FlutterLogan {
   static const MethodChannel _channel = const MethodChannel('flutter_logan');
 
   static Future<bool> init(
-      String aseKey, String aesIv, int maxFileLen) async {
-    final bool result = await _channel.invokeMethod('init',{'aesKey': aseKey, 'aesIv': aesIv, 'maxFileLen': maxFileLen});
+      String aesKey, String aesIv, int maxFileLen) async {
+    final bool result = await _channel.invokeMethod('init',{'aesKey': aesKey, 'aesIv': aesIv, 'maxFileLen': maxFileLen});
     return result;
   }
 

@@ -1,6 +1,6 @@
 name: log4f
 description: Logger for Flutter, inspired by Android logcat
-version: 0.0.1
+version: 0.0.3
 homepage: https://github.com/sahooz/log4f
 #author: Sahooz <2423096504@qq.com>
 
